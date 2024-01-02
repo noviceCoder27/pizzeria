@@ -1,9 +1,22 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react"
+import Menu from "../menu/Menu"
+import About from "../about/About"
+import Contact from "../contact/Contact"
 
 
-const Hero = () => {
+interface Section {
+  home?: boolean,
+  menu?: boolean,
+  about?: boolean,
+  contact?: boolean
+}
+interface Props {
+  openSection: Section
+}
+
+const Hero = ({openSection}: Props) => {
   return (
-    <Flex flexGrow={'1'} direction = {'column'} pl = {'25vw'} w= {{base:'100%', xl: '85%'}} backgroundImage={'https://max-themes.net//demos/albertos/upload/bg-pizza.jpg'} backgroundSize={'cover'} color = {'white'}>
+    <Flex overflowY = {'scroll'} position = {'relative'} flexGrow={'1'} direction = {'column'} pl = {'25vw'} w= {{base:'100%', xl: '85%'}} height = {'100dvh'} backgroundImage={'https://max-themes.net//demos/albertos/upload/bg-pizza.jpg'} backgroundSize={'cover'} color = {'white'}>
         <Heading mt = {'25vh'} fontFamily={'Patua One, cursive'} fontSize={'clamp(3rem,4vw,5rem)'} textShadow={'0 0 22px black'}>
             We have the best
         </Heading>
@@ -12,6 +25,9 @@ const Hero = () => {
                 Pizza
             </Text>
         </Box>
+        {openSection?.menu && <Menu />}
+        {openSection?.about && <About />}
+        {openSection?.contact && <Contact />}
     </Flex>
   )
 }
